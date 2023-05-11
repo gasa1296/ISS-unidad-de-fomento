@@ -7,6 +7,7 @@ def test_date_route():
     assert response.status_code < 300
 
 def test_invalid_date():
+    '''test an invalid date'''
     response = app.test_client().get('/2023/02/30')
     res = json.loads(response.data.decode('utf-8')).get("message")
     assert response.status_code >= 400 
@@ -14,6 +15,7 @@ def test_invalid_date():
     assert res == 'invalid date'
 
 def test_year_under_2013():
+    '''test a date with a year less than 2013'''
     response = app.test_client().get('/2012/02/01')
     res = json.loads(response.data.decode('utf-8')).get("message")
     assert response.status_code >= 400
@@ -30,8 +32,9 @@ def test_future_year_date():
     assert res == 'data not found'
 
 def test_future_date():
+    '''test a date with less than a year, more than current date'''
     future_datetime = datetime.now() + timedelta(days=1)
-    response = app.test_client().get(f'/{future_datetime.year}/02/01')
+    response = app.test_client().get(f'/{future_datetime.year}/{future_datetime.month}/{future_datetime.day}')
     res = json.loads(response.data.decode('utf-8')).get("response")
     assert response.status_code >= 200
     assert response.status_code < 300

@@ -4,5 +4,6 @@ Para ejecutar proyecto relizar los siguientes comando:
 `python -m venv venv`  
 `source env/bin/activate  #en Windows usar env\Scripts\activate`  
 `pip install -r requirements.txt`  
-`flask --app app run`
-
+`flask --app app run`  
+Para ejecutar pruebas ejecutar el siguiente comando:  
+`pytest test.py`
